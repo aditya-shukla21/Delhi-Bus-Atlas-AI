@@ -192,6 +192,8 @@ From the project root:
 python server.py --open --port 0
 ```
 
+> **Note:** Both startup methods launch the same Delhi Bus Atlas application. `Start planner.cmd` is the convenient Windows launcher: it locates an available Python executable and starts the local server automatically. The manual command is useful for developers who prefer to start the server from a terminal or a specific Python environment.
+
 The supplied SQLite/JSON runtime data means the normal app does not need the AI training dependencies or an internet connection. On first launch, `server.py` extracts `data/crowding.sqlite.zip` to `data/crowding.sqlite` if the extracted database is absent. Allow additional free disk space for the extracted file.
 
 ### Standalone demo

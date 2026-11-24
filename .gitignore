@@ -5,6 +5,18 @@ data/crowding.sqlite
 __pycache__/
 *.py[cod]
 
+# Local environments and secrets
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Original/private source data (keep the intentional crowding.sqlite.zip distributable)
+*October-Delhi*.csv
+*TDH*RVSHH*.zip
+*GTFS*.zip
+
 # Private/intermediate rebuild data
 ai/work/
 *.log

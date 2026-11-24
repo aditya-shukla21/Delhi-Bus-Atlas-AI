@@ -1,0 +1,12 @@
+# Runtime database is reconstructed from the compressed distributable.
+data/crowding.sqlite
+
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Private/intermediate rebuild data
+ai/work/
+*.log
+.DS_Store
+Thumbs.db

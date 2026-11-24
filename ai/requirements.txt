@@ -1,0 +1,5 @@
+numpy==2.3.5
+lightgbm==4.7.0
+scipy==1.18.1
+pyarrow==26.0.1
+narwhals==2.29.0

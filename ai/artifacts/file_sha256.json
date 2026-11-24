@@ -1,0 +1,20 @@
+{
+  "00_match_stops.py": "174ef28c1987833e0145fc1f4c6cca02612a602a0d29e24bd1b0cf96daadb01b",
+  "01_build_cells.py": "70fd5f69a436dc6816086a8bf47880d57d80d16ad7418b70e3c921f2b120c634",
+  "common.py": "47e4523a2973d93d7776ad5f724b893bae352db17495c432fe7b12815be6b1e7",
+  "matching.py": "3f2045f54e0b1f7f88e9a53b9d38a86fa7039f0cb58f7dae2520e7b5512c3e82",
+  "query.py": "a9634096667ffcf25679d5b5873d1ea6cc97032d1dea8bc2cf6ba567ab7901b7",
+  "README.md": "ceddcbbbc5b125bc4a8a2303f20d6c0df435adb7ce3f0e660fdb5c0889c67b98",
+  "requirements.txt": "4f7025551da35b28e0fb76de08e0b40c5bf470262f770e0df5301c32b55bb102",
+  "RESULTS.md": "0f5e4ccf1f3b304d2192f6ee6b3b7a8881ebc975311767f6f1ac3cc4c5f4a753",
+  "run_pipeline.py": "d44c027aa7f5f880b998a45468eee65f6dee8f53453c481b2e8cda396ea1ab13",
+  "test_data.py": "c1be61eff497c956a4d3198c0e36bc6b89fbaafe4149eb330f4b879a0f81b6fa",
+  "train.py": "24d9fe31bb4f3e484f9df42ed76ee975c0152f2291681ccddf3af1fdfd13fc0d",
+  "verify.py": "ca2bfad0fa786c5aec0c858d7097d223e7a441093d25f0afe7d5bd7e0c379118",
+  "artifacts/build_report.json": "e6551922120bc5afa3e8ba24a3d803c3ce13cd3616247863c0af2a8761abe54d",
+  "artifacts/crowd_grid.parquet": "d34124dd2db76f54c2a05aaac00537acd36197bed19780942b9e66debcc2610c",
+  "artifacts/crowd_model.lgb.txt": "deb3f98c5df659c2eb2f808ddabed4e11b2bc5b70c348f9f42c2f078e423c7bc",
+  "artifacts/eval.json": "bb9e2ed70d6b20f97fad60c85766f4f279e8b21922f2f39cf853af27746d8394",
+  "artifacts/metadata.json": "345b1b2b01e315657150b69eda357907ae3b3e9af6aa3a73007e9e7769b10a3d",
+  "artifacts/segments.sqlite": "febfa8de799906e8ae426ed30ac93bb33600033b79644d0f66e6bc8290138378"
+}

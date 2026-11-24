@@ -1,0 +1,83 @@
+{
+  "model": "LightGBM Poisson on per-traversal rate with scheduled traversal weights",
+  "model_sha256": "deb3f98c5df659c2eb2f808ddabed4e11b2bc5b70c348f9f42c2f078e423c7bc",
+  "lightgbm_version": "4.7.0",
+  "features": [
+    "half_hour",
+    "day_type",
+    "route_edges",
+    "edge_fraction",
+    "offset_min",
+    "scheduled_traversals",
+    "network_time_rate",
+    "route_time_rate",
+    "edge_all_time_rate",
+    "edge_time_rate",
+    "edge_history_exposure"
+  ],
+  "parameters": {
+    "objective": "poisson",
+    "metric": "poisson",
+    "learning_rate": 0.065,
+    "num_leaves": 31,
+    "min_data_in_leaf": 180,
+    "feature_fraction": 0.9,
+    "lambda_l2": 8.0,
+    "max_bin": 63,
+    "seed": 42,
+    "deterministic": true,
+    "force_col_wise": true,
+    "verbosity": -1,
+    "num_threads": 4
+  },
+  "rounds": 180,
+  "final_fit_period": [
+    "2026-10-01",
+    "2026-10-31"
+  ],
+  "timezone": "Asia/Kolkata",
+  "bin_minutes": 30,
+  "daytypes": [
+    "weekday",
+    "saturday",
+    "sunday"
+  ],
+  "grid_key": [
+    "route_short_name",
+    "from_stop_id",
+    "to_stop_id",
+    "daytype",
+    "bin"
+  ],
+  "class_names": [
+    "Low",
+    "Medium",
+    "High",
+    "Very High"
+  ],
+  "class_quantiles": [
+    0.4,
+    0.75,
+    0.92
+  ],
+  "class_thresholds_rate": [
+    0.3751698136329651,
+    0.9188872575759888,
+    1.8680205345153809
+  ],
+  "threshold_population": "All published supported rates, weighted by their full-month scheduled traversal counts. Equality goes in the lower band.",
+  "counts_by_class": {
+    "High": 96818,
+    "Low": 106825,
+    "Medium": 157470,
+    "Unknown": 3788991,
+    "Very High": 60096
+  },
+  "n_grid_rows": 4210200,
+  "support": {
+    "minimum_ticket_crossings": 10,
+    "minimum_contributing_dates": 3,
+    "unknown": "Rate and private support counts are null on a scheduled slot below either floor. Unscheduled slots are absent."
+  },
+  "limitation": "Relative historical ticketed demand per scheduled bus. October ticket coverage, actual arrivals, vehicle capacity, and true onboard occupancy are unknown."
+}

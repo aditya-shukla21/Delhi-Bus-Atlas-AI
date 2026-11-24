@@ -1,0 +1,608 @@
+{
+  "target": "Matched ticketed passengers on a directed GTFS route edge per scheduled traversal.",
+  "train": [
+    "2026-10-01",
+    "2026-10-18"
+  ],
+  "validation": [
+    "2026-10-19",
+    "2026-10-21"
+  ],
+  "test": [
+    "2026-10-22",
+    "2026-10-31"
+  ],
+  "best_iteration": 180,
+  "history": "Training and final-fit rows use only preceding calendar dates. Validation and test use a single history frozen at October 18. Day type is derived solely from the calendar.",
+  "evaluation": "All positive-exposure held-out cell-days, including zeros. All methods use identical rows and scheduled traversals. The supported subset uses only ticket and date counts available by October 18. The exact edge/time baseline backs off to route/time, then network/time.",
+  "metrics": "Predict rate per scheduled traversal. Cell count prediction equals rate times that date's scheduled traversals. Poisson deviance uses a 1e-12 floor; aggregate rank and MAE use route/daytype/half-hour groups with >=20 scheduled traversals.",
+  "sampling": {
+    "method": "Deterministic uniform sampling without replacement inside each route, independent of target.",
+    "eligible_train": 25261200,
+    "sampled_train": 1001190,
+    "eligible_validation": 4210200,
+    "sampled_validation": 250150,
+    "eligible_test": 14034000,
+    "sampled_test": false,
+    "eligible_full_month": 43505400,
+    "sampled_final_fit": 999168
+  },
+  "additional_zero_exposure_passenger_crossings_found_in_staged_cells": 0,
+  "staging_exclusions": "The builder removes matched passenger crossings without scheduled exposure before training. Its totals are recorded in build_report.json.",
+  "results": {
+    "all_active_test_cells": {
+      "global_bin_profile": {
+        "cell_days": 14034000,
+        "scheduled_traversals": 26567790,
+        "poisson_deviance_per_cell": 1.5859025962879079,
+        "mae_ticketed_passengers_per_cell": 0.6795110839753147,
+        "exposure_weighted_mae_rate": 0.3589406026059965,
+        "route_time_groups_min_20_traversals": 137601,
+        "route_time_spearman": 0.30423168096323533,
+        "route_time_weighted_mae_rate": 0.24690689455764897,
+        "weekday_profile_correlation": 0.9969627966875314
+      },
+      "route_bin_mean": {
+        "cell_days": 14034000,
+        "scheduled_traversals": 26567790,
+        "poisson_deviance_per_cell": 1.2189848250490378,
+        "mae_ticketed_passengers_per_cell": 0.49581105713289775,
+        "exposure_weighted_mae_rate": 0.2619040716522935,
+        "route_time_groups_min_20_traversals": 137601,
+        "route_time_spearman": 0.7103423790375858,
+        "route_time_weighted_mae_rate": 0.08638394731787834,
+        "weekday_profile_correlation": 0.9969627965969768
+      },
+      "route_edge_bin_mean": {
+        "cell_days": 14034000,
+        "scheduled_traversals": 26567790,
+        "poisson_deviance_per_cell": 2.2656007650884726,
+        "mae_ticketed_passengers_per_cell": 0.4178632437453487,
+        "exposure_weighted_mae_rate": 0.22072941568426369,
+        "route_time_groups_min_20_traversals": 137601,
+        "route_time_spearman": 0.7103190739980357,
+        "route_time_weighted_mae_rate": 0.08638394741665785,
+        "weekday_profile_correlation": 0.9969627965768235
+      },
+      "lightgbm": {
+        "cell_days": 14034000,
+        "scheduled_traversals": 26567790,
+        "poisson_deviance_per_cell": 0.7564180821383204,
+        "mae_ticketed_passengers_per_cell": 0.4380612654480773,
+        "exposure_weighted_mae_rate": 0.23139868989096632,
+        "route_time_groups_min_20_traversals": 137601,
+        "route_time_spearman": 0.7477963221848131,
+        "route_time_weighted_mae_rate": 0.08964732313766056,
+        "weekday_profile_correlation": 0.9975972720847204
+      }
+    },
+    "training_supported_test_cells": {
+      "global_bin_profile": {
+        "cell_days": 1573603,
+        "scheduled_traversals": 4297120,
+        "poisson_deviance_per_cell": 5.98753642003961,
+        "mae_ticketed_passengers_per_cell": 2.277697128909547,
+        "exposure_weighted_mae_rate": 0.8340914461647452,
+        "route_time_groups_min_20_traversals": 13901,
+        "route_time_spearman": 0.233119820638536,
+        "route_time_weighted_mae_rate": 0.6692312829980197,
+        "weekday_profile_correlation": 0.8106082413435465
+      },
+      "route_bin_mean": {
+        "cell_days": 1573603,
+        "scheduled_traversals": 4297120,
+        "poisson_deviance_per_cell": 2.772477783913011,
+        "mae_ticketed_passengers_per_cell": 1.9136445953426418,
+        "exposure_weighted_mae_rate": 0.7007756069565121,
+        "route_time_groups_min_20_traversals": 13901,
+        "route_time_spearman": 0.7391821229854041,
+        "route_time_weighted_mae_rate": 0.26996467601424134,
+        "weekday_profile_correlation": 0.9049035146974627
+      },
+      "route_edge_bin_mean": {
+        "cell_days": 1573603,
+        "scheduled_traversals": 4297120,
+        "poisson_deviance_per_cell": 2.001459386028818,
+        "mae_ticketed_passengers_per_cell": 1.6938536918574452,
+        "exposure_weighted_mae_rate": 0.6202882979921323,
+        "route_time_groups_min_20_traversals": 13901,
+        "route_time_spearman": 0.7942662241630865,
+        "route_time_weighted_mae_rate": 0.22023032146332044,
+        "weekday_profile_correlation": 0.9537147651171707
+      },
+      "lightgbm": {
+        "cell_days": 1573603,
+        "scheduled_traversals": 4297120,
+        "poisson_deviance_per_cell": 2.004945027930925,
+        "mae_ticketed_passengers_per_cell": 1.7072304902022448,
+        "exposure_weighted_mae_rate": 0.6251868742492002,
+        "route_time_groups_min_20_traversals": 13901,
+        "route_time_spearman": 0.7973128642287649,
+        "route_time_weighted_mae_rate": 0.2227613299946032,
+        "weekday_profile_correlation": 0.9442717433419916
+      }
+    },
+    "heldout_weekday_half_hour_profile": [
+      {
+        "bin": 0,
+        "local_time": "00:00",
+        "scheduled_traversals": 100058,
+        "observed": 0.00924463810989626,
+        "global_bin_profile": 0.010569702833890915,
+        "route_bin_mean": 0.010569703005144539,
+        "route_edge_bin_mean": 0.010569703003481427,
+        "lightgbm": 0.01493370435374267
+      },
+      {
+        "bin": 1,
+        "local_time": "00:30",
+        "scheduled_traversals": 56434,
+        "observed": 0.01079136690647482,
+        "global_bin_profile": 0.010243529453873634,
+        "route_bin_mean": 0.010243529389662774,
+        "route_edge_bin_mean": 0.010243529357706768,
+        "lightgbm": 0.014503725580845311
+      },
+      {
+        "bin": 2,
+        "local_time": "01:00",
+        "scheduled_traversals": 29484,
+        "observed": 0.027099443766110433,
+        "global_bin_profile": 0.02306900918483734,
+        "route_bin_mean": 0.0230690086474222,
+        "route_edge_bin_mean": 0.023069009401317873,
+        "lightgbm": 0.024183332741587075
+      },
+      {
+        "bin": 3,
+        "local_time": "01:30",
+        "scheduled_traversals": 16191,
+        "observed": 0.04508677660428633,
+        "global_bin_profile": 0.04550367593765259,
+        "route_bin_mean": 0.04550367575425469,
+        "route_edge_bin_mean": 0.045503674996156415,
+        "lightgbm": 0.04204895513334024
+      },
+      {
+        "bin": 4,
+        "local_time": "02:00",
+        "scheduled_traversals": 11697,
+        "observed": 0.0512952038984355,
+        "global_bin_profile": 0.04632954299449921,
+        "route_bin_mean": 0.04632954418675813,
+        "route_edge_bin_mean": 0.046329543325146785,
+        "lightgbm": 0.04280601206463766
+      },
+      {
+        "bin": 5,
+        "local_time": "02:30",
+        "scheduled_traversals": 9625,
+        "observed": 0.0611948051948052,
+        "global_bin_profile": 0.053515151143074036,
+        "route_bin_mean": 0.053515151417331014,
+        "route_edge_bin_mean": 0.05351515177504472,
+        "lightgbm": 0.04731407752245704
+      },
+      {
+        "bin": 6,
+        "local_time": "03:00",
+        "scheduled_traversals": 9156,
+        "observed": 0.050786369593709045,
+        "global_bin_profile": 0.040647298097610474,
+        "route_bin_mean": 0.04064729907511473,
+        "route_edge_bin_mean": 0.0406472987078017,
+        "lightgbm": 0.03866616492374162
+      },
+      {
+        "bin": 7,
+        "local_time": "03:30",
+        "scheduled_traversals": 9870,
+        "observed": 0.052077001013171226,
+        "global_bin_profile": 0.0346926711499691,
+        "route_bin_mean": 0.03469267201309483,
+        "route_edge_bin_mean": 0.03469267193530398,
+        "lightgbm": 0.035006048737410665
+      },
+      {
+        "bin": 8,
+        "local_time": "04:00",
+        "scheduled_traversals": 15855,
+        "observed": 0.032860296436455376,
+        "global_bin_profile": 0.027409860864281654,
+        "route_bin_mean": 0.02740986034926816,
+        "route_edge_bin_mean": 0.027409860452961437,
+        "lightgbm": 0.02931658083905126
+      },
+      {
+        "bin": 9,
+        "local_time": "04:30",
+        "scheduled_traversals": 48846,
+        "observed": 0.02677803709617983,
+        "global_bin_profile": 0.025484858080744743,
+        "route_bin_mean": 0.025484857367404155,
+        "route_edge_bin_mean": 0.025484857265183514,
+        "lightgbm": 0.026163413970341498
+      },
+      {
+        "bin": 10,
+        "local_time": "05:00",
+        "scheduled_traversals": 126910,
+        "observed": 0.07888267276022377,
+        "global_bin_profile": 0.07845652103424072,
+        "route_bin_mean": 0.07845651706053564,
+        "route_edge_bin_mean": 0.07845651809060993,
+        "lightgbm": 0.08078852426438204
+      },
+      {
+        "bin": 11,
+        "local_time": "05:30",
+        "scheduled_traversals": 231455,
+        "observed": 0.12405867231211251,
+        "global_bin_profile": 0.12215081602334976,
+        "route_bin_mean": 0.12215081466199972,
+        "route_edge_bin_mean": 0.12215081444271796,
+        "lightgbm": 0.12777389342382486
+      },
+      {
+        "bin": 12,
+        "local_time": "06:00",
+        "scheduled_traversals": 341544,
+        "observed": 0.1422012976366149,
+        "global_bin_profile": 0.14383164048194885,
+        "route_bin_mean": 0.14383163971359486,
+        "route_edge_bin_mean": 0.1438316396152459,
+        "lightgbm": 0.14684123750470698
+      },
+      {
+        "bin": 13,
+        "local_time": "06:30",
+        "scheduled_traversals": 422170,
+        "observed": 0.1849918279366132,
+        "global_bin_profile": 0.18464599549770355,
+        "route_bin_mean": 0.18464599549596186,
+        "route_edge_bin_mean": 0.18464599629081418,
+        "lightgbm": 0.18737287286881546
+      },
+      {
+        "bin": 14,
+        "local_time": "07:00",
+        "scheduled_traversals": 497182,
+        "observed": 0.23750859846092578,
+        "global_bin_profile": 0.2406923770904541,
+        "route_bin_mean": 0.24069237530665485,
+        "route_edge_bin_mean": 0.24069237628156614,
+        "lightgbm": 0.26785995895410447
+      },
+      {
+        "bin": 15,
+        "local_time": "07:30",
+        "scheduled_traversals": 565684,
+        "observed": 0.3157982195006399,
+        "global_bin_profile": 0.3199101984500885,
+        "route_bin_mean": 0.3199102036253539,
+        "route_edge_bin_mean": 0.31991020363211836,
+        "lightgbm": 0.3482243799856965
+      },
+      {
+        "bin": 16,
+        "local_time": "08:00",
+        "scheduled_traversals": 609658,
+        "observed": 0.4429581831124991,
+        "global_bin_profile": 0.4459444284439087,
+        "route_bin_mean": 0.44594442168297516,
+        "route_edge_bin_mean": 0.4459444208286724,
+        "lightgbm": 0.46365266545859135
+      },
+      {
+        "bin": 17,
+        "local_time": "08:30",
+        "scheduled_traversals": 609434,
+        "observed": 0.6625360580473029,
+        "global_bin_profile": 0.6495227813720703,
+        "route_bin_mean": 0.6495227550549467,
+        "route_edge_bin_mean": 0.649522754456947,
+        "lightgbm": 0.7135417369646156
+      },
+      {
+        "bin": 18,
+        "local_time": "09:00",
+        "scheduled_traversals": 584556,
+        "observed": 0.7613453629763445,
+        "global_bin_profile": 0.7216773629188538,
+        "route_bin_mean": 0.7216773638363376,
+        "route_edge_bin_mean": 0.7216773644543621,
+        "lightgbm": 0.7630842782471303
+      },
+      {
+        "bin": 19,
+        "local_time": "09:30",
+        "scheduled_traversals": 565215,
+        "observed": 0.7121573206655875,
+        "global_bin_profile": 0.621426522731781,
+        "route_bin_mean": 0.621426508261221,
+        "route_edge_bin_mean": 0.6214265079599645,
+        "lightgbm": 0.6946642387090107
+      },
+      {
+        "bin": 20,
+        "local_time": "10:00",
+        "scheduled_traversals": 553210,
+        "observed": 0.5059796460656893,
+        "global_bin_profile": 0.4497036933898926,
+        "route_bin_mean": 0.44970370005658633,
+        "route_edge_bin_mean": 0.44970369955986916,
+        "lightgbm": 0.5299355909846925
+      },
+      {
+        "bin": 21,
+        "local_time": "10:30",
+        "scheduled_traversals": 541373,
+        "observed": 0.36154739892828053,
+        "global_bin_profile": 0.32361313700675964,
+        "route_bin_mean": 0.3236131397912651,
+        "route_edge_bin_mean": 0.3236131411988969,
+        "lightgbm": 0.37183360337135046
+      },
+      {
+        "bin": 22,
+        "local_time": "11:00",
+        "scheduled_traversals": 537355,
+        "observed": 0.24821579775009073,
+        "global_bin_profile": 0.23583664000034332,
+        "route_bin_mean": 0.23583664447241665,
+        "route_edge_bin_mean": 0.23583664514329772,
+        "lightgbm": 0.27045494243877183
+      },
+      {
+        "bin": 23,
+        "local_time": "11:30",
+        "scheduled_traversals": 535591,
+        "observed": 0.1854456105498412,
+        "global_bin_profile": 0.1920839101076126,
+        "route_bin_mean": 0.19208391636444636,
+        "route_edge_bin_mean": 0.19208391684693826,
+        "lightgbm": 0.20763004776886337
+      },
+      {
+        "bin": 24,
+        "local_time": "12:00",
+        "scheduled_traversals": 530089,
+        "observed": 0.15961847916104654,
+        "global_bin_profile": 0.16037212312221527,
+        "route_bin_mean": 0.160372126319244,
+        "route_edge_bin_mean": 0.16037212705606993,
+        "lightgbm": 0.16434999626987368
+      },
+      {
+        "bin": 25,
+        "local_time": "12:30",
+        "scheduled_traversals": 509978,
+        "observed": 0.1366156971477201,
+        "global_bin_profile": 0.14103664457798004,
+        "route_bin_mean": 0.14103663963827537,
+        "route_edge_bin_mean": 0.1410366403307715,
+        "lightgbm": 0.13982962642298988
+      },
+      {
+        "bin": 26,
+        "local_time": "13:00",
+        "scheduled_traversals": 492520,
+        "observed": 0.12039714123284334,
+        "global_bin_profile": 0.12111403048038483,
+        "route_bin_mean": 0.12111403236661335,
+        "route_edge_bin_mean": 0.12111403330293566,
+        "lightgbm": 0.1212439466190624
+      },
+      {
+        "bin": 27,
+        "local_time": "13:30",
+        "scheduled_traversals": 489566,
+        "observed": 0.10918650396473611,
+        "global_bin_profile": 0.11199681460857391,
+        "route_bin_mean": 0.11199681668316178,
+        "route_edge_bin_mean": 0.11199681684889293,
+        "lightgbm": 0.11406836881314143
+      },
+      {
+        "bin": 28,
+        "local_time": "14:00",
+        "scheduled_traversals": 505687,
+        "observed": 0.10187131565573171,
+        "global_bin_profile": 0.10583440959453583,
+        "route_bin_mean": 0.10583440619741791,
+        "route_edge_bin_mean": 0.10583440676167867,
+        "lightgbm": 0.11041067323322579
+      },
+      {
+        "bin": 29,
+        "local_time": "14:30",
+        "scheduled_traversals": 512414,
+        "observed": 0.1096086367663647,
+        "global_bin_profile": 0.11583700031042099,
+        "route_bin_mean": 0.11583699880963699,
+        "route_edge_bin_mean": 0.11583699960457597,
+        "lightgbm": 0.11766747220479612
+      },
+      {
+        "bin": 30,
+        "local_time": "15:00",
+        "scheduled_traversals": 527863,
+        "observed": 0.11289861195044927,
+        "global_bin_profile": 0.11720196902751923,
+        "route_bin_mean": 0.11720196961908307,
+        "route_edge_bin_mean": 0.11720197045791056,
+        "lightgbm": 0.11901062304219376
+      },
+      {
+        "bin": 31,
+        "local_time": "15:30",
+        "scheduled_traversals": 545132,
+        "observed": 0.12157055538841968,
+        "global_bin_profile": 0.1287110298871994,
+        "route_bin_mean": 0.12871102792192776,
+        "route_edge_bin_mean": 0.1287110284139207,
+        "lightgbm": 0.12950075905203648
+      },
+      {
+        "bin": 32,
+        "local_time": "16:00",
+        "scheduled_traversals": 570962,
+        "observed": 0.13535226512447412,
+        "global_bin_profile": 0.14313970506191254,
+        "route_bin_mean": 0.14313970725742942,
+        "route_edge_bin_mean": 0.14313970763199893,
+        "lightgbm": 0.14188030101230678
+      },
+      {
+        "bin": 33,
+        "local_time": "16:30",
+        "scheduled_traversals": 590450,
+        "observed": 0.15875179947497672,
+        "global_bin_profile": 0.1658160388469696,
+        "route_bin_mean": 0.1658160447636419,
+        "route_edge_bin_mean": 0.16581604500633804,
+        "lightgbm": 0.16530112864477522
+      },
+      {
+        "bin": 34,
+        "local_time": "17:00",
+        "scheduled_traversals": 588392,
+        "observed": 0.21301275340249357,
+        "global_bin_profile": 0.21201837062835693,
+        "route_bin_mean": 0.21201837678853436,
+        "route_edge_bin_mean": 0.21201837744933624,
+        "lightgbm": 0.2209960513735779
+      },
+      {
+        "bin": 35,
+        "local_time": "17:30",
+        "scheduled_traversals": 565887,
+        "observed": 0.3063032018759929,
+        "global_bin_profile": 0.29829129576683044,
+        "route_bin_mean": 0.298291296238768,
+        "route_edge_bin_mean": 0.29829129686261263,
+        "lightgbm": 0.32458030191219944
+      },
+      {
+        "bin": 36,
+        "local_time": "18:00",
+        "scheduled_traversals": 543319,
+        "observed": 0.39900316388714546,
+        "global_bin_profile": 0.3808143436908722,
+        "route_bin_mean": 0.38081434122186547,
+        "route_edge_bin_mean": 0.38081434116496304,
+        "lightgbm": 0.41669078954818967
+      },
+      {
+        "bin": 37,
+        "local_time": "18:30",
+        "scheduled_traversals": 528213,
+        "observed": 0.4688279160111546,
+        "global_bin_profile": 0.44499221444129944,
+        "route_bin_mean": 0.44499220273691986,
+        "route_edge_bin_mean": 0.44499220370903403,
+        "lightgbm": 0.4897370078243067
+      },
+      {
+        "bin": 38,
+        "local_time": "19:00",
+        "scheduled_traversals": 519330,
+        "observed": 0.4593091098145688,
+        "global_bin_profile": 0.44417262077331543,
+        "route_bin_mean": 0.44417262064889196,
+        "route_edge_bin_mean": 0.44417262051362394,
+        "lightgbm": 0.48643269875135664
+      },
+      {
+        "bin": 39,
+        "local_time": "19:30",
+        "scheduled_traversals": 514668,
+        "observed": 0.40855852705044804,
+        "global_bin_profile": 0.4098672866821289,
+        "route_bin_mean": 0.40986730048040604,
+        "route_edge_bin_mean": 0.40986730028028706,
+        "lightgbm": 0.4449024243062759
+      },
+      {
+        "bin": 40,
+        "local_time": "20:00",
+        "scheduled_traversals": 516313,
+        "observed": 0.343243342701036,
+        "global_bin_profile": 0.34374675154685974,
+        "route_bin_mean": 0.3437467523595581,
+        "route_edge_bin_mean": 0.34374675265710136,
+        "lightgbm": 0.3830808182602801
+      },
+      {
+        "bin": 41,
+        "local_time": "20:30",
+        "scheduled_traversals": 509145,
+        "observed": 0.2784059550815583,
+        "global_bin_profile": 0.28398066759109497,
+        "route_bin_mean": 0.2839806613194896,
+        "route_edge_bin_mean": 0.2839806610243416,
+        "lightgbm": 0.3204674931356727
+      },
+      {
+        "bin": 42,
+        "local_time": "21:00",
+        "scheduled_traversals": 487389,
+        "observed": 0.21358504192749528,
+        "global_bin_profile": 0.22335684299468994,
+        "route_bin_mean": 0.22335684009662674,
+        "route_edge_bin_mean": 0.22335684030315436,
+        "lightgbm": 0.24774491745871463
+      },
+      {
+        "bin": 43,
+        "local_time": "21:30",
+        "scheduled_traversals": 438725,
+        "observed": 0.1620012536326856,
+        "global_bin_profile": 0.17157958447933197,
+        "route_bin_mean": 0.17157957694203893,
+        "route_edge_bin_mean": 0.1715795779035974,
+        "lightgbm": 0.1738002712293932
+      },
+      {
+        "bin": 44,
+        "local_time": "22:00",
+        "scheduled_traversals": 381010,
+        "observed": 0.12582871840634105,
+        "global_bin_profile": 0.1302376091480255,
+        "route_bin_mean": 0.1302376141122668,
+        "route_edge_bin_mean": 0.13023761464552086,
+        "lightgbm": 0.13422963689216497
+      },
+      {
+        "bin": 45,
+        "local_time": "22:30",
+        "scheduled_traversals": 308623,
+        "observed": 0.08726504505496999,
+        "global_bin_profile": 0.08747835457324982,
+        "route_bin_mean": 0.08747835830162434,
+        "route_edge_bin_mean": 0.08747835866480924,
+        "lightgbm": 0.09839572299880282
+      },
+      {
+        "bin": 46,
+        "local_time": "23:00",
+        "scheduled_traversals": 234619,
+        "observed": 0.04703796367728104,
+        "global_bin_profile": 0.04629988595843315,
+        "route_bin_mean": 0.04629988785234225,
+        "route_edge_bin_mean": 0.046299887924915,
+        "lightgbm": 0.04815947426479381
+      },
+      {
+        "bin": 47,
+        "local_time": "23:30",
+        "scheduled_traversals": 158606,
+        "observed": 0.023479565716303292,
+        "global_bin_profile": 0.022151852026581764,
+        "route_bin_mean": 0.0221518520806963,
+        "route_edge_bin_mean": 0.022151852346394673,
+        "lightgbm": 0.027848143631460473
+      }
+    ]
+  }
+}

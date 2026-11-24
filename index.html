@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#113e38">
+  <title>Delhi Bus Atlas · Journey planner</title>
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/journey_ai.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to planner</a>
+  <header class="topbar">
+    <div class="shell nav-inner">
+      <a class="brand" href="#planner" aria-label="Delhi Bus Atlas home">
+        <span class="brand-symbol" aria-hidden="true"><i></i></span>
+        Delhi Bus Atlas
+      </a>
+      <nav aria-label="Views"><a id="nav-planner" href="#planner" aria-current="page">Journey planner</a><a id="nav-operator" href="#operator">Operator view</a><button id="language" type="button" lang="hi" aria-label="हिन्दी में देखें">हिन्दी</button></nav>
+    </div>
+  </header>
+  <main id="main" class="shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Plan your bus journey<span>.</span></h1>
+        <p id="page-description">Compare travel time and expected crowding on Delhi buses.</p>
+      </div>
+      <div class="transit-art" aria-hidden="true">
+        <div class="bus"><i class="windows"></i><i class="door"></i><i class="wheel front"></i><i class="wheel rear"></i></div>
+        <div class="track"><i></i><i></i><i></i><i></i></div>
+      </div>
+    </section>
+    <div id="planner-view" class="planner-layout">
+      <aside>
+        <form class="trip-panel" id="trip-form">
+          <h2>Journey details</h2>
+          <div class="endpoints">
+            <div class="endpoint-field">
+              <label for="origin"><span class="point from" aria-hidden="true"></span><span>From</span></label>
+              <input id="origin" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="origin-list" autocomplete="off" placeholder="Search origin stop" required maxlength="100">
+              <ul id="origin-list" class="suggestions" role="listbox" aria-label="Origin stops" hidden></ul>
+            </div>
+            <button id="swap" class="swap" type="button" title="Swap stops" aria-label="Swap origin and destination">⇅</button>
+            <div class="endpoint-field">
+              <label for="destination"><span class="point to" aria-hidden="true"></span><span>To</span></label>
+              <input id="destination" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="destination-list" autocomplete="off" placeholder="Search destination stop" required maxlength="100">
+              <ul id="destination-list" class="suggestions" role="listbox" aria-label="Destination stops" hidden></ul>
+            </div>
+          </div>
+          <div class="datetime-row">
+            <label><span>Date</span><input id="date" type="date" required></label>
+            <label><span>Leave at</span> <span class="unit-note">IST</span><input id="time" type="time" required></label>
+          </div>
+          <div class="comfort-field"><label for="comfort"><span>Comfort preference</span><output id="comfort-value" for="comfort">0%</output></label>
+            <input type="range" id="comfort" min="0" max="100" step="1" value="0">
+            <div class="range-labels"><span>Fastest</span><span>Least crowded</span></div>
+          </div>
+          <button class="primary-btn" type="submit"><span>Find journeys</span><span aria-hidden="true">→</span></button>
+          <p id="form-message" class="form-message" aria-live="polite"></p>
+        </form>
+        <section class="reading-note">
+          <h3>Reading the crowd estimate</h3>
+          <p>Each strip compares the predicted number of ticketed passengers crossing a stretch per scheduled bus with October levels across Delhi. Unknown means too little evidence. Seat availability is unmeasured.</p>
+          <div class="legend" aria-label="Crowd levels"><span><i class="swatch low"></i><span>Low</span></span><span><i class="swatch medium"></i><span>Medium</span></span><span><i class="swatch high"></i><span>High</span></span><span><i class="swatch very-high"></i><span>Very High</span></span><span><i class="swatch unknown"></i><span>Unknown</span></span></div>
+        </section>
+      </aside>
+      <section class="results" aria-labelledby="results-title" aria-busy="false">
+        <div class="results-head"><h2 id="results-title">Journey options</h2>
+        </div>
+        <p class="result-context" id="result-context" aria-live="polite">Choose stops to compare journeys.</p>
+        <div id="options"></div>
+        <div id="journey-tools" hidden>
+          <section class="extra-panel map-panel" aria-labelledby="map-title">
+            <div class="section-heading"><h2 id="map-title">Route map</h2><label for="map-option" class="sr-only">Mapped journey</label><select id="map-option"></select></div>
+            <div class="map-frame"><canvas id="journey-map" role="img" aria-describedby="map-info"></canvas></div>
+            <p id="map-info"></p>
+          </section>
+          <section class="extra-panel" aria-labelledby="advice-title"><h2 id="advice-title">Leave later?</h2>
+            <p id="advice" aria-live="polite"></p><div id="advice-details"></div>
+          </section>
+          <section class="extra-panel ask-panel" aria-labelledby="ask-title"><h2 id="ask-title">Ask about your journey</h2>
+            <form id="ask-form"><label for="question" class="sr-only">Journey question</label><input id="question" type="text" maxlength="300" required placeholder="Which option is less crowded?"><button id="ask-button" type="submit">Ask</button></form>
+            <p id="answer" aria-live="polite"></p>
+          </section>
+        </div>
+      </section>
+    </div>
+    <section id="operator-view" hidden aria-labelledby="operator-title">
+      <div class="operator-bar"><div><h2 id="operator-title">Higher-load stretches</h2><p>Stretches need at least 10 supporting ticket crossings across 3 distinct dates.</p></div>
+        <form id="operator-form">
+          <label><span>Day type</span><select id="day-type"><option value="weekday">Weekday</option><option value="saturday">Saturday</option><option value="sunday">Sunday</option></select></label>
+          <label><span>Half-hour window</span> <span class="unit-note">IST</span><select id="hour"></select></label>
+        </form>
+      </div>
+      <p id="operator-context" aria-live="polite"></p>
+      <div id="hotspots"></div>
+    </section>
+    <footer><strong>Delhi Bus Atlas</strong><span>Historical ticket estimates · Scheduled bus times · Delhi, IST</span></footer>
+  </main>
+</body>
+</html>

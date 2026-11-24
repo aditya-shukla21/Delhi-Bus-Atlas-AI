@@ -1,0 +1,233 @@
+{
+  "ticket_csv_sha256": "d5d71aafccc13d03b09ab5c27e96fa303621a0cde9b0e5eea63167c2083e332f",
+  "rows_read": 2559899,
+  "rejected_for_demand_profile": {},
+  "route_labels_including_null": 2259,
+  "boarding_names_including_null": 7148,
+  "distinct_nonmissing_vehicle_labels": 6809,
+  "ticket_type_counts": {
+    "1": 2559899
+  },
+  "passenger_count_frequencies": {
+    "1": 2392082,
+    "2": 141930,
+    "3": 25886,
+    "6": 1
+  },
+  "daily": {
+    "2026-10-01": {
+      "tickets": 95155,
+      "passengers": 101171,
+      "missing_vehicle": 49503
+    },
+    "2026-10-02": {
+      "tickets": 41016,
+      "passengers": 45706,
+      "missing_vehicle": 19430
+    },
+    "2026-10-03": {
+      "tickets": 75708,
+      "passengers": 80911,
+      "missing_vehicle": 37466
+    },
+    "2026-10-04": {
+      "tickets": 46622,
+      "passengers": 51831,
+      "missing_vehicle": 22098
+    },
+    "2026-10-05": {
+      "tickets": 99517,
+      "passengers": 106379,
+      "missing_vehicle": 50715
+    },
+    "2026-10-06": {
+      "tickets": 81592,
+      "passengers": 87481,
+      "missing_vehicle": 41470
+    },
+    "2026-10-07": {
+      "tickets": 100385,
+      "passengers": 107503,
+      "missing_vehicle": 50951
+    },
+    "2026-10-08": {
+      "tickets": 102219,
+      "passengers": 109330,
+      "missing_vehicle": 51836
+    },
+    "2026-10-09": {
+      "tickets": 100032,
+      "passengers": 107190,
+      "missing_vehicle": 50911
+    },
+    "2026-10-10": {
+      "tickets": 67249,
+      "passengers": 72796,
+      "missing_vehicle": 31993
+    },
+    "2026-10-11": {
+      "tickets": 45057,
+      "passengers": 50789,
+      "missing_vehicle": 21108
+    },
+    "2026-10-12": {
+      "tickets": 94588,
+      "passengers": 101195,
+      "missing_vehicle": 48360
+    },
+    "2026-10-13": {
+      "tickets": 101697,
+      "passengers": 108557,
+      "missing_vehicle": 52059
+    },
+    "2026-10-14": {
+      "tickets": 101540,
+      "passengers": 108424,
+      "missing_vehicle": 51629
+    },
+    "2026-10-15": {
+      "tickets": 99848,
+      "passengers": 106390,
+      "missing_vehicle": 50240
+    },
+    "2026-10-16": {
+      "tickets": 98503,
+      "passengers": 105481,
+      "missing_vehicle": 49969
+    },
+    "2026-10-17": {
+      "tickets": 68836,
+      "passengers": 74273,
+      "missing_vehicle": 24090
+    },
+    "2026-10-18": {
+      "tickets": 35009,
+      "passengers": 40103,
+      "missing_vehicle": 5180
+    },
+    "2026-10-19": {
+      "tickets": 74801,
+      "passengers": 80945,
+      "missing_vehicle": 28606
+    },
+    "2026-10-20": {
+      "tickets": 49375,
+      "passengers": 56102,
+      "missing_vehicle": 21569
+    },
+    "2026-10-21": {
+      "tickets": 93657,
+      "passengers": 99884,
+      "missing_vehicle": 46087
+    },
+    "2026-10-22": {
+      "tickets": 95860,
+      "passengers": 102021,
+      "missing_vehicle": 47174
+    },
+    "2026-10-23": {
+      "tickets": 95559,
+      "passengers": 101861,
+      "missing_vehicle": 47347
+    },
+    "2026-10-24": {
+      "tickets": 81046,
+      "passengers": 87457,
+      "missing_vehicle": 38529
+    },
+    "2026-10-25": {
+      "tickets": 50161,
+      "passengers": 56767,
+      "missing_vehicle": 22650
+    },
+    "2026-10-26": {
+      "tickets": 92632,
+      "passengers": 99114,
+      "missing_vehicle": 45840
+    },
+    "2026-10-27": {
+      "tickets": 102746,
+      "passengers": 109569,
+      "missing_vehicle": 51627
+    },
+    "2026-10-28": {
+      "tickets": 100879,
+      "passengers": 107517,
+      "missing_vehicle": 50434
+    },
+    "2026-10-29": {
+      "tickets": 92529,
+      "passengers": 98342,
+      "missing_vehicle": 46773
+    },
+    "2026-10-30": {
+      "tickets": 91896,
+      "passengers": 97699,
+      "missing_vehicle": 45888
+    },
+    "2026-10-31": {
+      "tickets": 84185,
+      "passengers": 90818,
+      "missing_vehicle": 40635
+    }
+  },
+  "days_by_type": {
+    "weekday": 22,
+    "weekend": 9
+  },
+  "mean_passengers_ticketed_per_day_by_ist_hour": {
+    "weekday": [
+      48.64,
+      19.95,
+      13.91,
+      14.0,
+      71.64,
+      855.95,
+      2441.41,
+      5688.05,
+      12266.32,
+      13479.77,
+      7547.27,
+      4073.5,
+      3117.86,
+      2571.95,
+      2542.14,
+      2785.18,
+      3755.09,
+      6527.36,
+      9372.82,
+      8671.45,
+      6351.41,
+      3586.41,
+      1534.18,
+      293.77
+    ],
+    "weekend": [
+      56.0,
+      18.67,
+      15.67,
+      18.0,
+      64.89,
+      751.0,
+      1977.33,
+      3694.78,
+      7171.67,
+      8629.22,
+      5563.11,
+      3355.78,
+      2708.78,
+      2293.0,
+      2171.22,
+      2218.67,
+      2804.0,
+      3980.56,
+      5410.44,
+      5373.56,
+      4417.33,
+      2906.11,
+      1426.67,
+      278.56
+    ]
+  },
+  "meaning": "Network-wide passenger counts by ticket issue time. These measure ticketing activity and do not identify individual bus loads."
+}

@@ -1,6 +1,6 @@
 # Delhi Bus Atlas — AI-integrated crowd-aware bus journey planner
 
-Delhi Bus Atlas is an offline-first journey planner for Delhi buses. It combines DTC/DIMTS static GTFS schedules, historical ticket-derived crowd estimates, route geometry and a local browser interface to help compare scheduled bus journeys by travel time and historical crowd conditions.
+Delhi Bus Atlas is an offline-first journey planner for Delhi buses. It combines DTC/DIMTS static GTFS schedules, historical ticket-derived crowd estimates, route geometry and a local browser interface to help compare scheduled bus journeys by travel time and historical crowd conditions. It is made to ease the journey of commuters, travellers.
 
 > **Important:** Crowd estimates represent historical ticketed passengers per scheduled bus traversal of a route stretch. They are not live passenger counts, vehicle occupancy or seat availability. Unsupported estimates are shown as **Unknown**, not as Low.
 

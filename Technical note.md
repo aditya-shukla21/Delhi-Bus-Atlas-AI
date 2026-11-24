@@ -19,7 +19,7 @@ On macOS/Linux use `.venv/bin/python` for the last two commands. All input paths
 - Raw tickets are streamed, and matching uses route-local normalized names, slash aliases and conservative spelling matches. Only a unique forward path of GTFS stop IDs is accepted. Ambiguous records are counted in the audit.
 - Every scheduled trip contributes only the actual edges that it traverses. Shared edges pool within the same directional route, including short-route variants. Calendar exceptions and service dates are respected.
 - Ticket travel time is propagated along the matched path. A midnight crossing updates both the date and half-hour. Out-of-month crossings are counted and excluded.
-- Training covers October 1Ã¢â‚¬â€œ18, validation October 19Ã¢â‚¬â€œ21 and testing October 22Ã¢â‚¬â€œ31. Historical features for training rows use preceding dates only. Validation and test histories are frozen at October 18. The final production model is subsequently refitted using all October dates.
+- Training covers October 1–18, validation October 19–21 and testing October 22–31. Historical features for training rows use preceding dates only. Validation and test histories are frozen at October 18. The final production model is subsequently refitted using all October dates.
 - Day types are weekday, Saturday and Sunday, derived from the calendar. No low-volume test dates are inferred as holidays.
 - Each published rate requires at least ten supporting ticket crossings on three distinct dates. Scheduled slots below either threshold retain an Unknown class and a null rate.
 - The exact route label and boarding/alighting stop IDs accompany every prediction. A separate SQLite mapping preserves the original pattern/segment sequence.
@@ -68,7 +68,7 @@ The first command tests matching, variant exposure, service calendars and rollov
 
 # Rebuild results
 
-The corrected model was trained and evaluated on the original October archive. The test comprises 14,034,000 scheduled edge/half-hour/day cells from October 22Ã¢â‚¬â€œ31. Training uses October 1Ã¢â‚¬â€œ18 and validation October 19Ã¢â‚¬â€œ21. All test features use history frozen at October 18.
+The corrected model was trained and evaluated on the original October archive. The test comprises 14,034,000 scheduled edge/half-hour/day cells from October 22–31. Training uses October 1–18 and validation October 19–21. All test features use history frozen at October 18.
 
 | Method | Cell MAE | Poisson deviance | Route/time rank correlation |
 |---|---:|---:|---:|

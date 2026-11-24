@@ -1,0 +1,41 @@
+flowchart TB
+  subgraph Browser["Browser UI"]
+    HTML["index.html"]
+    APP["app.js"]
+    QAI["journey_ai.js<br/>limited local intent classifier"]
+    CSS["style.css"]
+  end
+  subgraph Server["Local Python server · 127.0.0.1"]
+    HTTP["server.py<br/>HTTP routes"]
+    ROUTE["routing.py<br/>journey search + scoring"]
+    OP["operator_view.py<br/>hotspot lookup"]
+    MAP["route_map.py<br/>geometry lookup/build"]
+  end
+  subgraph Runtime["Runtime data"]
+    TT[("timetable.sqlite")]
+    CROWD[("crowding.sqlite")]
+    GEO[("geometry.sqlite")]
+    HOT["hotspots.json"]
+    EX["example.json"]
+  end
+  subgraph Build["Offline build"]
+    RAW["Ticket CSV + static GTFS"]
+    REBUILD["rebuild.py"]
+    PIPE["ai/ pipeline<br/>match · cells · train · evaluate"]
+    GRID["crowd_grid.parquet + model artifacts"]
+    IMPORT["import_ai.py"]
+  end
+  HTML --> APP
+  HTML --> CSS
+  APP --> HTTP
+  APP --> QAI
+  HTTP --> ROUTE
+  HTTP --> OP
+  ROUTE --> TT
+  ROUTE --> CROWD
+  ROUTE --> GEO
+  OP --> HOT
+  HTTP --> EX
+  RAW --> REBUILD --> PIPE --> GRID --> IMPORT --> CROWD
+  REBUILD --> TT
+  REBUILD --> GEO

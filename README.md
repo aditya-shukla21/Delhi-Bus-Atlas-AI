@@ -1,8 +1,10 @@
 # Delhi Bus Atlas — integrated AI planner
 
+Delhi Bus Atlas is an offline-first, crowd-aware journey planner for Delhi buses. It combines static DTC/DIMTS GTFS schedules, historical ticket-derived crowd estimates and a local browser interface.
+
 ## Open the app
 
-Extract the complete ZIP. On Windows, double-click **Start planner.cmd**. Python 3.11 or later is required. The browser opens locally; keep the terminal running. The supplied compiled databases mean no Python packages or internet access are needed to run the app. The large crowd database is stored as `data/crowding.sqlite.zip` for GitHub compatibility and is automatically extracted by `server.py` on first launch; allow a little extra disk space for the extracted database.
+Extract the complete ZIP. On Windows, double-click **Start planner.cmd**. Python 3.11 or later is required. The browser opens locally; keep the terminal running. The supplied compiled databases mean no Python packages or internet access are needed to run the app. The large crowd database is stored as `data/crowding.sqlite.zip` for GitHub compatibility and is automatically extracted by `server.py` on first launch; allow extra disk space for the extracted database.
 
 Alternatively run:
 
@@ -12,14 +14,14 @@ python server.py --open --port 0
 
 **Journey demo.html** opens directly in a browser with a saved example. It supports the Comfort slider, maps, English/Hindi, operator periods, later-departure comparisons and journey questions. Stop/date changes require the full app.
 
-## Included
+## Main features
 
-- Local planner and API, GTFS timetable, clipped geographic route shapes.
-- Corrected LightGBM model, Parquet grid, exact GTFS mapping, metadata and held-out evaluation in ai/artifacts.
-- SQLite crowd database imported directly from that grid, with preserved sparse-data support.
-- English/Hindi interface, continuous comfort preference, historical crowd bands, leave-later checks.
-- A local bilingual intent classifier answering journey questions from the planner's computed results.
-- Rebuild scripts, dependencies, verification tests, technical note and demo walkthrough.
+- Direct and one-transfer scheduled journey search.
+- Crowd-aware ranking with a continuous comfort preference.
+- Historical crowd bands and ticket/date evidence for each supported stretch.
+- Evidence coverage, with unsupported cells shown as Unknown.
+- Offline GTFS route geometry, English/Hindi interface and operator hotspot view.
+- A limited bilingual journey-intent classifier that answers supported questions using planner results.
 
 ## What the estimates mean
 
@@ -27,7 +29,7 @@ Rates are predicted ticketed passengers crossing a stretch per scheduled bus tra
 
 Evidence lists ticket crossings and contributing dates. Coverage is the proportion of scheduled riding time with supported estimates; it is not prediction accuracy. Overall journey bands require at least 50% coverage. Unknown time receives the highest penalty during comfort sorting. Dates outside October reuse October weekday, Saturday or Sunday patterns.
 
-The model scored all 14,034,000 scheduled held-out cell-days on October 22–31. LightGBM improves Poisson deviance and rank correlation, while the historical edge baseline has lower MAE. See ai/RESULTS.md for exact values and limitations. Approximately 10% of scheduled grid combinations meet publication support.
+The model scored all 14,034,000 scheduled held-out cell-days on October 22–31. LightGBM improves Poisson deviance and rank correlation, while the historical edge baseline has lower MAE. See [ai/RESULTS.md](ai/RESULTS.md) and the [model card](docs/MODEL_CARD.md). Approximately 10% of scheduled grid combinations meet publication support.
 
 ## Journey search
 
@@ -36,6 +38,18 @@ First departures are within 60 minutes. Search supports direct journeys and one 
 The advisor evaluates three ten-minute windows starting 10, 20 and 30 minutes later. A recommendation requires a distinct later bus, a lower crowd band and score, at least 75% coverage on both journeys, and arrival no more than 15 minutes later than the current choice.
 
 The offline map draws GTFS geometry where matched and identifies fallback stop connections. Stop names retain the source feed's spelling in both languages. The assistant classifies a limited set of question types locally and constructs answers from verified query results. It provides no live tracking, fare prediction or general conversation.
+
+## Documentation
+
+The full documentation and diagrams are in **[docs/](docs/README.md)**:
+
+- [System architecture](docs/ARCHITECTURE.md)
+- [End-to-end workflow](docs/SYSTEM_WORKFLOW.md)
+- [AI pipeline](docs/AI_PIPELINE.md)
+- [Data dictionary](docs/DATA_DICTIONARY.md)
+- [HTTP API reference](docs/API_REFERENCE.md)
+- [Installation and verification](docs/INSTALLATION.md)
+- [Model card and limitations](docs/MODEL_CARD.md)
 
 ## Rebuild from the original data
 
@@ -46,7 +60,7 @@ python -m pip install -r ai/requirements.txt
 python rebuild.py "path/to/TDH - RVSHH 2 (1).zip"
 ```
 
-This recreates the timetable, route geometry, demand audit, corrected training data and model, imports the grid into SQLite, rebuilds operator rankings and the offline demo, and runs integration checks. Intermediate ticket data is stored in ai/work and must stay private. The raw source ZIP is supplied separately.
+This recreates the timetable, route geometry, demand audit, corrected training data and model, imports the grid into SQLite, rebuilds operator rankings and the offline demo, and runs integration checks. Intermediate ticket data is stored in `ai/work` and must stay private. The raw source ZIP and ticket CSV are supplied separately. Check the source-data path configured in `ai/common.py` before rebuilding.
 
 To refresh the runtime database from an already built model:
 
@@ -70,14 +84,8 @@ The last command requires rebuilt private staging. It checks chronology, every p
 
 ## HTTP interface
 
-- /health
-- /v1/stops/search?q=Lal%20Kuan
-- /v1/plan?from=2821&to=2773&date=2026-10-26&time=09%3A00&preference=50
-- /v1/advice with the same query fields
-- /v1/hotspots?day=weekday&hour=18
+See [docs/API_REFERENCE.md](docs/API_REFERENCE.md) for full parameters and behavior. Main routes: `/health`, `/v1/example`, `/v1/stops/search`, `/v1/plan`, `/v1/advice` and `/v1/hotspots`.
 
-Preference is 0–100. For hotspots, day is weekday/saturday/sunday and the legacy hour parameter holds a half-hour bin, 0–47. The browser runs journey-question classification locally. Runtime SQLite contains exact route labels and directed stop IDs.
+## Data credits and privacy
 
-## Data credits
-
-The user supplied October-Delhi.csv and the full DTC/DIMTS static bus GTFS feed. Python, NumPy, LightGBM, SciPy and Apache Arrow support offline processing. The app uses standard browser APIs and a local Python server. Raw ticket and vehicle records are excluded from this distribution. Training sampling, source hashes, model parameters and scoring rules accompany the artifacts.
+The project uses user-supplied October-Delhi ticket data and the DTC/DIMTS static bus GTFS feed. Python, NumPy, LightGBM, SciPy and Apache Arrow support offline processing. Raw ticket and vehicle records are excluded from this distribution. Training sampling, source hashes, model parameters and scoring rules accompany the artifacts. Keep source ticket data and `ai/work/` intermediates private.

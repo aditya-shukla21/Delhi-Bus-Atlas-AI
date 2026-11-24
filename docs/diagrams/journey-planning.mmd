@@ -1,0 +1,20 @@
+flowchart TD
+  A["User selects origin, destination, date, time, preference"] --> B["Browser searches stop IDs"]
+  B --> C["GET /v1/plan"]
+  C --> D["Find active GTFS service patterns"]
+  D --> E["Search departures within 60 minutes"]
+  E --> F{"Direct journey found?"}
+  F -->|Yes| G["Build direct journey candidates"]
+  F -->|No / also| H["Check one-transfer connections"]
+  H --> I["Same GTFS stop ID<br/>2–45 min transfer wait"]
+  G --> J["Expand each ridden leg into directed edges"]
+  I --> J
+  J --> K["Lookup crowd by route, edge, day type, half-hour"]
+  K --> L["Unsupported evidence?"]
+  L -->|Yes| M["Keep crowd class Unknown"]
+  L -->|No| N["Attach predicted rate, class and evidence"]
+  M --> O["Score and rank journey alternatives"]
+  N --> O
+  O --> P["Return JSON to browser"]
+  P --> Q["Render times, transfers, crowd bands, coverage and map"]
+  Q --> R["Optional advice / hotspots / local intent classification"]
